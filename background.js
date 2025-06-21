@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         messages: [
           {
             role: "user",
-            content: text
+            content: "Please analyze this sentence and tell me if it's likely misinformation:\n\n" + text
           }
         ]
       });
