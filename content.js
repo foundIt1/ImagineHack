@@ -22,10 +22,19 @@ async function mockFactCheck(text) {
       messages: [
         {
           role: "user",
-          content: `You're a fact-checking assistant.use only 15 words . Follow this format so i can easily implement it with this code(    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
-    console.log("✅ AI Response:", data);
-):\n\n"${text}"`
-        }
+          content:  `
+You are a fact-checking assistant. For the sentence below, respond in this *structured order* but **do not include any labels or numbering**:
+
+1. First line: Verdict only → ✅ True / ❌ False / ⚠️ Needs Context  
+2. Second line: Very short explanation (max 15 words)  
+3. Third line: A direct, trustworthy source link (WHO, CDC, university, or government site)
+
+Only return these three lines in your response. Do NOT include any extra text or format explanation.
+
+Sentence:  
+"${text}"
+  `
+        } 
       ],
       temperature: 0.7
     })
@@ -38,14 +47,15 @@ async function mockFactCheck(text) {
         sources: []
       };
     }
-    const data = await response.json();
-    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
-    console.log("✅ AI Response:", data);
+  const lines = resultText.trim().split("\n");
+  const verdict = lines[0] || "⚠️ No verdict";
+  const explanation = lines[1] || "⚠️ No explanation";
+  const sourceUrl = lines[2] || "";
 
-    return {
-      result: resultText,
-      sources: []
-    }
+  return {
+    result: `${verdict}<br>${explanation}`,
+    sources: sourceUrl ? [sourceUrl] : []
+  };
 }
 
 // Function to handle the fact-checking logic
@@ -86,7 +96,6 @@ function showResultBox(Finalmessage, sources = []) {
     ${sources.length > 0
       ? `<p><strong>Sources:</strong><br>${sources.map(s => `<a href="${s}" target="_blank">${s}</a>`).join("<br>")}</p>`
       : ""}
-    <small style="color:#d63031; display:block; margin-top:10px;">⚠ AI-generated result. Please verify sources.</small>
     <button id="close-result-box" style="margin-top:10px; background-color:#ccc; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;">✖ Close</button>
   `;
 
