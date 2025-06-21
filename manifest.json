@@ -1,17 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "AI Fact Checker",
-    "permissions": ["scripting", "activeTab"],
-    "backgroud": {
-        "service_worker": "background.js"
-    },
-    "content_scripts": [
-        {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-        }
-    ],
-    "action": {
-        "default_title": "Check Highlighted Text"
+  "manifest_version": 3,
+  "name": "AI Checker",
+  "version": "1.0",
+  "description": "Highlight text on any website and check it for misinformation using AI.",
+  "permissions": ["contextMenus","scripting","activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["style.css"]
     }
+  ],
+  "background":{
+    "service_worker":"background.js",
+    "type": "module"
+  },
+  "icons": {
+    "128": "hello_extensions.png"
+  }
 }
