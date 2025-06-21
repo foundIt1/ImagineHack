@@ -5,9 +5,11 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "CHECK_TEXT") {
     FactCheck(message.payload);
+    FactCheck(message.payload);
   }
 });
 
+// AI checker logic
 // AI checker logic
 async function mockFactCheck(text) {
 
@@ -79,8 +81,10 @@ function showResultBox(Finalmessage, sources = []) {
 
   const box = document.createElement("div");
   box.id = "ai-result-box"; // Apply styles by ID
+  box.id = "ai-result-box"; // Apply styles by ID
 
   box.innerHTML = `
+    <div id="drag-header">🧠 AI Fact Checker</div>
     <div id="drag-header">🧠 AI Fact Checker</div>
     <p>${Finalmessage}</p>
     ${sources.length > 0
@@ -100,9 +104,10 @@ function showResultBox(Finalmessage, sources = []) {
 }
 
 function makeDraggable(element, handle) {
-  let offsetX = 0,
+    let offsetX = 0,
     offsetY = 0,
     isDragging = false;
+
 
   handle.addEventListener("mousedown", (e) => {
     isDragging = true;
@@ -123,12 +128,17 @@ function makeDraggable(element, handle) {
   });
 }
 
+
 function highlightSelection() {
   const selection = window.getSelection();
   if (!selection.rangeCount || selection.isCollapsed) return;
 
+  if (!selection.rangeCount || selection.isCollapsed) return;
+
   const range = selection.getRangeAt(0);
   const highlight = document.createElement("span");
+  // Add a class instead of specifying styles directly
+  highlight.className = "ai-checker-highlight";
   // Add a class instead of specifying styles directly
   highlight.className = "ai-checker-highlight";
   highlight.appendChild(range.extractContents());
@@ -159,6 +169,21 @@ function removeHighlights() {
     parent.removeChild(span);
   });
 }
+
+
+function removeHighlights() {
+  // Find highlighted elements by class name
+  const highlights = document.querySelectorAll("span.ai-checker-highlight");
+  highlights.forEach(span => {
+    const parent = span.parentNode;
+    while (span.firstChild) {
+      parent.insertBefore(span.firstChild, span);
+    }
+    parent.removeChild(span);
+  });
+}
+
+
 
 
 function WaitScreen() {
