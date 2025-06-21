@@ -56,7 +56,7 @@ Initial version supports text verification. Planned future updates include:
 ## 🧪 How It Works
 
 1. **Install the Extension**  
-   Add "AI Checker" from the Chrome Web Store.
+Clone the repository and save it in a file. Go to your extensions tab and enable developer mode and click the  "Load Unpacked" to select the local repository folder
 
 2. **Browse the Web**  
    Open any article, blog post, or social media content in Chrome.
@@ -64,10 +64,10 @@ Initial version supports text verification. Planned future updates include:
 3. **Highlight Text**  
    Select the sentence or claim you want to verify.
 
-4. **Click "AI Checker"**  
-   A button appears. Click it to analyze the selection.
+4. **Click "AI Checker"**
+Right-click while the text is still selected and click on the "Check Validity" button.
 
-5. **View the Results**  
+6. **View the Results**  
    A popup displays the verdict, a short explanation, and (when possible) a trusted source link.
 
 ## 🧭 Notes
