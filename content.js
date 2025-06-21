@@ -1,4 +1,7 @@
-
+//fix the highlight issue
+//make the interface more presentable
+//find a name for the extension
+//make the text more displayable
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "CHECK_TEXT") {
     FactCheck (message.payload);
