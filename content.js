@@ -85,7 +85,6 @@ function showResultBox(Finalmessage, sources = []) {
 
   box.innerHTML = `
     <div id="drag-header">🧠 AI Fact Checker</div>
-    <div id="drag-header">🧠 AI Fact Checker</div>
     <p>${Finalmessage}</p>
     ${sources.length > 0
       ? `<p><strong>Sources:</strong><br>${sources.map(s => `<a href="${s}" target="_blank">${s}</a>`).join("<br>")}</p>`
