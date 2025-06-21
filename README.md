@@ -1,15 +1,15 @@
 # ImagineHack
 
 ## 🔍 Project Title  
-**AI Checker**: A Chrome Extension for Countering Misinformation on Websites
+**Enforcer**: A Chrome Extension for Countering Misinformation on Websites
 
 ## 📄 Description  
-**AI Checker** is a Google Chrome extension designed to combat misinformation by enabling users to fact-check claims directly on web pages. With AI integration, users can highlight any text and receive instant verification without leaving the page. The goal is to restore trust and accountability in digital spaces by making credible information accessible and easy to use.
+**Enforcer** is a Google Chrome extension designed to combat misinformation by enabling users to fact-check claims directly on web pages. With AI integration, users can highlight any text and receive instant verification without leaving the page. The goal is to restore trust and accountability in digital spaces by making credible information accessible and easy to use.
 
 ## 👨‍💻 Team Members  
 - Shawn  
 - Bunta Iwasaki  
-- Hokiento  
+- Hokianto Husin
 - Yen-Mei  
 - Saad
 
