@@ -1,7 +1,7 @@
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "CHECK_TEXT") {
-    showResultBox(message.payload);
+    FactCheck (message.payload);
   }
 });
 
@@ -19,7 +19,7 @@ async function mockFactCheck(text) {
       messages: [
         {
           role: "user",
-          content: `You're a fact-checking assistant. Follow this format so i can easily implement it with this code(    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
+          content: `You're a fact-checking assistant.use only 15 words . Follow this format so i can easily implement it with this code(    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
     console.log("✅ AI Response:", data);
 ):\n\n"${text}"`
         }
@@ -47,34 +47,19 @@ async function mockFactCheck(text) {
 
 // Function to handle the fact-checking logic
 async function FactCheck(text) {
-  // Show loading screen
-  WaitScreen();
-
-  // Call the mockFactCheck function
-  const result = await mockFactCheck(text);
-
-  // Remove loading screen
-  const waitBox = document.getElementById("wait-screen");
-  if (waitBox) waitBox.remove();
-  // Show the result box with the AI response
-  showResultBox(result.result);
-  // Return the result for further processing if needed
-  return result;
+  WaitScreen(); // Show loading
+  const result = await mockFactCheck(text); // Call API
+  document.getElementById("wait-screen")?.remove(); // Hide loading
+  showResultBox(result.result, result.sources); // Show result popup
 }
 
 // Show floating box
-function showResultBox(message) {
-  const { result: Finalmessage, sources } = mockFactCheck(message);
+function showResultBox(Finalmessage, sources = []) {
   highlightSelection();
 
-
-  // Remove old box if it exists
-  if (document.getElementById("ai-result-box")) {
-    document.getElementById("ai-result-box").remove();
-  }
-  // Create new box
   const oldBox = document.getElementById("ai-result-box");
   if (oldBox) oldBox.remove();
+
   const box = document.createElement("div");
   box.id = "ai-result-box";
   Object.assign(box.style, {
@@ -156,7 +141,7 @@ function removeHighlights() {
     }
     parent.removeChild(span);
   });
-
+}
 function WaitScreen() {
     const waitBox = document.createElement("div");
     waitBox.id = "wait-screen";
@@ -175,4 +160,3 @@ function WaitScreen() {
     waitBox.innerHTML = `<div style="color: white; font-size: 20px;">🔄 Loading...</div>`;
     document.body.appendChild(waitBox);
   }
-}
