@@ -8,9 +8,17 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "check-AI") {
-    chrome.tabs.sendMessage(tab.id, {
-      type: "CHECK_TEXT",
-      payload: info.selectionText
-    });
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tab.id },
+        files: ["content.js"]
+      },
+      () => {
+        chrome.tabs.sendMessage(tab.id, {
+          type: "CHECK_TEXT",
+          payload: info.selectionText
+        });
+      }
+    );
   }
 });
