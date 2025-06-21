@@ -22,9 +22,6 @@ function mockFactCheck(text) {
 function showResultBox(message) {
   // Remove any existing result box
   Finalmessage,sources=mockFactCheck(message);
-  const existing = document.getElementById("ai-result-box");
-  if (existing) existing.remove();
-
   const box = document.createElement("div");
   box.id = "ai-result-box";
   Object.assign(box.style, {
@@ -54,9 +51,31 @@ function showResultBox(message) {
   `;
 
   document.body.appendChild(box);
-
   // Close button event
   document.getElementById("close-result-box").addEventListener("click", () => {
     box.remove();
   });
+
+  makeDraggable(box,document,getElementById("drag-header"));
+  function makeDraggable(element, handle) {
+  let offsetX = 0, offsetY = 0, isDragging = false;
+
+  handle.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - element.offsetLeft;
+    offsetY = e.clientY - element.offsetTop;
+    document.body.style.userSelect = "none"; // prevent accidental text selection
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    element.style.left = `${e.clientX - offsetX}px`;
+    element.style.top = `${e.clientY - offsetY}px`;
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    document.body.style.userSelect = "auto";
+  });
+}
 }
