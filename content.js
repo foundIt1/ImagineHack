@@ -1,43 +1,4 @@
 
-const button = document.createElement("button");
-button.id = "ai-checker-btn";
-button.innerText = "🧠 AI Checker";
-
-Object.assign(button.style, {
-  position: "fixed",
-  top: "20px",
-  right: "20px",
-  zIndex: "9999",
-  backgroundColor: "#4b7bec",
-  color: "white",
-  border: "none",
-  borderRadius: "12px",
-  padding: "12px 18px",
-  fontSize: "14px",
-  fontWeight: "600",
-  cursor: "pointer",
-  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-});
-
-document.body.appendChild(button);
-
-// Step 2: Handle button click
-button.addEventListener("click", () => {
-  const selectedText = window.getSelection().toString().trim();
-
-  if (!selectedText) {
-    alert("⚠ Please highlight some text first.");
-    return;
-  }
-
-  // Step 3: Call your AI check function
-  // For now, use mock logic
-  const result = mockFactCheck(selectedText);
-
-  // Step 4: Show result overlay
-  showResultBox(result.result, result.sources);
-});
-
 // Mock AI checker function
 function mockFactCheck(text) {
   const lower = text.toLowerCase();
@@ -58,8 +19,9 @@ function mockFactCheck(text) {
 }
 
 // Step 5: Show a floating result box
-function showResultBox(message, sources = []) {
+function showResultBox(message) {
   // Remove any existing result box
+  Finalmessage,sources=mockFactCheck(message);
   const existing = document.getElementById("ai-result-box");
   if (existing) existing.remove();
 

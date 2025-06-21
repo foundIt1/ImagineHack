@@ -3,7 +3,7 @@
   "name": "AI Checker",
   "version": "1.0",
   "description": "Highlight text on any website and check it for misinformation using AI.",
-  "permissions": ["scripting", "activeTab","contextMenus"],
+  "permissions": ["contextMenus","scripting","activeTab"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
@@ -12,6 +12,9 @@
       "css": ["style.css"]
     }
   ],
+  "background":{
+    "service_worker":"background.js"
+  },
   "icons": {
     "128": "hello_extensions.png"
   }
