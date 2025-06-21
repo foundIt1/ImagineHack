@@ -1,37 +1,80 @@
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "CHECK_TEXT") {
     showResultBox(message.payload);
   }
 });
 
-// Mock AI checker logic
-function mockFactCheck(text) {
-  const lower = text.toLowerCase();
-  if (lower.includes("5g causes cancer")) {
+//  AI checker logic
+async function mockFactCheck(text) {
+
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer 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",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ 
+       model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+      messages: [
+        {
+          role: "user",
+          content: `You're a fact-checking assistant. Follow this format so i can easily implement it with this code(    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
+    console.log("✅ AI Response:", data);
+):\n\n"${text}"`
+        }
+      ],
+      temperature: 0.7
+    })
+    });
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("❌ API Error:", response.status, errText);
+      return {
+        result: `⚠️ API error (${response.status}): ${errText}`,
+        sources: []
+      };
+    }
+    const data = await response.json();
+    const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
+    console.log("✅ AI Response:", data);
+
     return {
-      result: "❌ Misinformation Detected: Scientific research has not found a link between 5G and cancer.",
-      sources: [
-        "https://www.who.int/news-room/q-a-detail/radiation-5g-mobile-networks-and-health"
-      ]
-    };
-  }
-  return {
-    result: "✅ No obvious misinformation detected in the selected text.",
-    sources: []
-  };
+      result: resultText,
+      sources: []
+    }
+}
+
+// Function to handle the fact-checking logic
+async function FactCheck(text) {
+  // Show loading screen
+  WaitScreen();
+
+  // Call the mockFactCheck function
+  const result = await mockFactCheck(text);
+
+  // Remove loading screen
+  const waitBox = document.getElementById("wait-screen");
+  if (waitBox) waitBox.remove();
+  // Show the result box with the AI response
+  showResultBox(result.result);
+  // Return the result for further processing if needed
+  return result;
 }
 
 // Show floating box
 function showResultBox(message) {
   const { result: Finalmessage, sources } = mockFactCheck(message);
   highlightSelection();
+
+
   // Remove old box if it exists
   if (document.getElementById("ai-result-box")) {
     document.getElementById("ai-result-box").remove();
   }
+  // Create new box
   const oldBox = document.getElementById("ai-result-box");
   if (oldBox) oldBox.remove();
-
   const box = document.createElement("div");
   box.id = "ai-result-box";
   Object.assign(box.style, {
@@ -113,4 +156,23 @@ function removeHighlights() {
     }
     parent.removeChild(span);
   });
+
+function WaitScreen() {
+    const waitBox = document.createElement("div");
+    waitBox.id = "wait-screen";
+    Object.assign(waitBox.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: "9999"
+    });
+    waitBox.innerHTML = `<div style="color: white; font-size: 20px;">🔄 Loading...</div>`;
+    document.body.appendChild(waitBox);
+  }
 }
