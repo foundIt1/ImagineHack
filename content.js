@@ -29,7 +29,7 @@ You are a fact-checking assistant. For the sentence below, respond in this *stru
 2. Second line: Very short explanation (max 15 words)  
 3. Third line: A direct, trustworthy source link (WHO, CDC, university, or government site)
 
-Only return these three lines in your response. Do NOT include any extra text or format explanation.
+Only return these three lines in your response. Do NOT include any extra text or format explanation.Make sure to use a source that is reliable and relevant to the claim made in the sentence.Make sure that the link has actual data related to the claim made in the sentence.
 
 Sentence:  
 "${text}"
@@ -47,6 +47,10 @@ Sentence:
         sources: []
       };
     }
+  const data = await response.json();
+  const resultText = data.choices?.[0]?.message?.content || "⚠️ No response from AI.";
+  console.log("✅ AI Response:", resultText);
+
   const lines = resultText.trim().split("\n");
   const verdict = lines[0] || "⚠️ No verdict";
   const explanation = lines[1] || "⚠️ No explanation";
