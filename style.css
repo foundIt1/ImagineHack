@@ -6,8 +6,6 @@
 
 /* --- Result Box Styles --- */
 #ai-result-box {
-/* --- Result Box Styles --- */
-#ai-result-box {
   position: fixed;
   top: 80px;
   left: 100px;
@@ -97,5 +95,4 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
 }
