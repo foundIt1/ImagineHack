@@ -10,11 +10,11 @@
   top: 80px;
   left: 100px;
   max-width: 360px;
-  background: #f6f6ff;
+  background: #ffffff;
   border-radius: 12px;
-  border: 1px solid #f6f6ff;
+  border: 1px solid #ffffff;
   padding: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   z-index: 9999;
   font-size: 14px;
 }
@@ -26,10 +26,10 @@
 }
 
 #ai-result-box small {
-  color: #ff5555;
+  color: #e44d4d;
   display: block;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 
@@ -47,8 +47,8 @@
 
 #close-result-box:hover {
   background-color: #c9c9c9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 
