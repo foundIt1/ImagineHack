@@ -16,20 +16,59 @@
   padding: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   z-index: 9999;
+  color: #131313;
   font-size: 14px;
+  max-height: 200px; 
+  overflow-y: auto;  
+  display: flex;      
+  flex-direction: column; 
+  overflow-wrap: break-word; 
+  overflow-x: hidden;
+}
+
+
+#ai-result-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+#ai-result-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#ai-result-box::-webkit-scrollbar-thumb {
+  background: #c9c9c9;
+  border-radius: 10px;
+}
+
+#ai-result-box::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+
+#ai-result-box p {
+  flex-shrink: 0; 
+}
+
+
+#ai-result-box small,
+#ai-result-box #close-result-box {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 #drag-header {
   cursor: move;
   font-weight: bold;
   margin-bottom: 10px;
+  font-size: 35px;
 }
 
 #ai-result-box small {
   color: #e44d4d;
   display: block;
   margin-top: 10px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 
@@ -54,7 +93,7 @@
 
 /* --- Text Highlight Styles --- */
 .ai-checker-highlight {
-  background-color: yellow;
+  background-color: rgb(242, 255, 0);
   color: black;
   padding: 2px 4px;
 }
