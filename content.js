@@ -225,13 +225,13 @@ function removeHighlights() {
   });
 }
 
-  function WaitScreen() {
-    const waitBox = document.createElement("div");
-    waitBox.id = "wait-screen";
+function WaitScreen() {
+  const waitBox = document.createElement("div");
+  waitBox.id = "wait-screen";
 
-    waitBox.innerHTML = `
-      <div class="ai-checker-spinner"></div>
-      <div class="ai-checker-loading-text">Analyzing...</div>
-    `;
-    document.body.appendChild(waitBox);
-  }
+  waitBox.innerHTML = `
+    <div class="ai-checker-spinner"></div>
+    <div class="ai-checker-loading-text">Analyzing...</div>
+  `;
+  document.body.appendChild(waitBox);
+}
