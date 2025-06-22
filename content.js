@@ -29,16 +29,6 @@ function getRootDomain(url) {
   async function mockFactCheck(text) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
-//       headers: {
-// <<<<<<< Updated upstream
-// <<<<<<< Updated upstream
-//         Authorization: "Bearer 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", // <-- REDACT THIS
-// =======
-//         Authorization: "Bearer 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", // <-- REDACT THIS
-// >>>>>>> Stashed changes
-// =======
-
-//       },
       headers: {
         Authorization: "Bearer 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", 
         "Content-Type": "application/json"
@@ -51,7 +41,7 @@ function getRootDomain(url) {
 You are the world's best fact-checking assistant. For the sentence below, respond in this structured order and do not include any labels or numbering:
 
 First line: Verdict only → ✅ True / ❌ False / ⚠️ Needs Context
-Second line: Very short explanation (max 35 words)
+Second line: Short explanation (max 50 words)
 Third line: A direct, trustworthy source link (WHO, CDC, university, or government site)
 Sourcing Rules:
 
@@ -95,7 +85,6 @@ Link: Root homepage of the most relevant credible authority (e.g. WHO)
 
 Sentence:
 "${text}"
-
 
   `
         }],
