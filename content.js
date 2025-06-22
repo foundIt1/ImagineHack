@@ -37,12 +37,10 @@ function getRootDomain(url) {
 //         Authorization: "Bearer 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", // <-- REDACT THIS
 // >>>>>>> Stashed changes
 // =======
-//         Authorization: "Bearer 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", // <-- REDACT THIS
-// >>>>>>> Stashed changes
-//         "Content-Type": "application/json"
+
 //       },
       headers: {
-        Authorization: "Bearer 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", 
+        Authorization: "Bearer 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", 
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
