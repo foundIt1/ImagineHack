@@ -29,16 +29,20 @@ function getRootDomain(url) {
   async function mockFactCheck(text) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
+//       headers: {
+// <<<<<<< Updated upstream
+// <<<<<<< Updated upstream
+//         Authorization: "Bearer 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", // <-- REDACT THIS
+// =======
+//         Authorization: "Bearer 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", // <-- REDACT THIS
+// >>>>>>> Stashed changes
+// =======
+//         Authorization: "Bearer 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", // <-- REDACT THIS
+// >>>>>>> Stashed changes
+//         "Content-Type": "application/json"
+//       },
       headers: {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        Authorization: "Bearer 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", // <-- REDACT THIS
-=======
-        Authorization: "Bearer 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", // <-- REDACT THIS
->>>>>>> Stashed changes
-=======
-        Authorization: "Bearer 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", // <-- REDACT THIS
->>>>>>> Stashed changes
+        Authorization: "Bearer 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", 
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
