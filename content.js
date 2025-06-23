@@ -30,7 +30,7 @@ function getRootDomain(url) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: "Bearer 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", 
+        Authorization: "Bearer (Put key here)", 
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
